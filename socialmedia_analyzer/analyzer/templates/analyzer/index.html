@@ -1,0 +1,265 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Comments Analyzer</title>
+  <style>
+          /* General Styles */
+          * {
+              margin: 0;
+              padding: 0;
+              box-sizing: border-box;
+          }
+      
+          body {
+              font-family: 'Poppins', sans-serif;
+              background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+              min-height: 100vh;
+              color: white;
+          }
+      
+          /* Header */
+          header {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              padding: 20px 50px;
+              background: rgba(20, 20, 20, 0.4); /* Transparent Header */
+              backdrop-filter: blur(10px); /* Frosted glass */
+              position: sticky;
+              top: 0;
+              z-index: 1000;
+          }
+      
+          header h1 {
+              font-size: 2rem;
+              color: #4CAF50;
+          }
+      
+          nav ul {
+              list-style: none;
+              display: flex;
+              gap: 30px;
+          }
+      
+          nav ul li a {
+              color: white;
+              text-decoration: none;
+              font-weight: 500;
+          }
+      
+          nav ul li a:hover {
+              color: #4CAF50;
+          }
+      
+          .auth-links a {
+              padding: 10px 20px;
+              border-radius: 20px;
+              background: linear-gradient(135deg, #4CAF50, #388E3C);
+              color: white;
+              text-decoration: none;
+              font-weight: 500;
+          }
+      
+          /* Hero Section */
+          .hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 90vh;
+    background: url("{% static 'analyzer/image/emoji1.jpg' %}") no-repeat center center/cover;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Dark overlay */
+    backdrop-filter: blur(5px); /* Light blur effect */
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.hero-content h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    background: linear-gradient(90deg, #4CAF50, #00C853);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: bold;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #ddd;
+}
+
+.hero-content .cta-button {
+    padding: 15px 30px;
+    background: linear-gradient(90deg, #4CAF50, #00C853);
+    color: white;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none; /* because now it's a link <a> */
+}
+
+.hero-content .cta-button:hover {
+    background: linear-gradient(90deg, #00C853, #4CAF50);
+    transform: scale(1.05);
+}
+
+      
+          /* Features Section */
+          .features {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 60px 20px;
+    flex-wrap: wrap;
+    background: url("{% static 'analyzer/image/emoji1.jpg' %}") no-repeat center center/cover;
+    position: relative;
+}
+
+.features::after {
+    content: '';
+    position: absolute;
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    z-index: 1;
+}
+
+.feature-item {
+    position: relative;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    padding: 40px 30px;
+    width: 300px;
+    text-align: center;
+    color: white;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.feature-item i {
+    font-size: 40px;
+    margin-bottom: 20px;
+    color: #00C853;
+}
+
+.feature-item h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    background: linear-gradient(90deg, #4CAF50, #00C853);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: bold;
+}
+
+.feature-item p {
+    font-size: 1rem;
+    color: #ddd;
+}
+
+.feature-item:hover {
+    transform: translateY(-10px) scale(1.05);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+      
+          /* Footer */
+          footer {
+              text-align: center;
+              padding: 20px;
+              background: rgba(20, 20, 20, 0.4);
+              backdrop-filter: blur(10px);
+              font-size: 0.9rem;
+          }
+      
+          footer a {
+              color: #4CAF50;
+          }
+    </style>
+</head>
+      
+<body>
+
+    <header>
+        <h1>Comments Analyzer</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">How It Works</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </nav>
+        <div class="auth-links">
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'signup' %}">Sign Up</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Analyze Social Media Comments with Ease</h2>
+            <p>Uncover sentiment, detect spam, and stay informed with real-time comment analysis.</p>
+            <a href="{% url 'login' %}" class="cta-button">Start Analyzing</a>
+        </div>
+    </section>
+    
+
+    <section class="features">
+        <div class="feature-item">
+            <i class="fas fa-chart-pie"></i>
+            <h3>Real-Time Analysis</h3>
+            <p>Instantly process and analyze comments from multiple social platforms.</p>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-heart"></i>
+            <h3>Sentiment Detection</h3>
+            <p>Understand the emotions behind comments using advanced AI algorithms.</p>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-shield-alt"></i>
+            <h3>Spam Detection</h3>
+            <p>Filter out spam and irrelevant comments to focus on what matters most.</p>
+        </div>
+    </section>
+    
+
+    <footer>
+        <p>&copy; 2025 Social Media Comments Analyzer | <a href="#">Privacy Policy</a></p>
+    </footer>
+
+</body>
+</html>

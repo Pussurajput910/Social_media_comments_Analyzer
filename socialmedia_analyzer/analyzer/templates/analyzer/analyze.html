@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analyze YouTube Comments</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: url("{% static 'analyzer/image/emoji7.jpg' %}") no-repeat center center/cover;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(5px);
+    }
+
+    .container {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        padding: 50px 40px;
+        border-radius: 20px;
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+        width: 100%;
+        max-width: 400px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: #ffffff;
+        text-align: center;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      font-weight: 700;
+      color: black;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      margin: 15px 0 5px 5px;
+      font-size: 14px;
+      color: black;
+      font-weight: bold;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px 15px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.25);
+      color: white;
+      font-size: 15px;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    input::placeholder {
+      color: black;
+    }
+
+    input:focus {
+      background: rgba(255, 255, 255, 0.35);
+      box-shadow: 0 0 0 2px #6dd5ed;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+      color: #333;
+      font-size: 18px;
+      font-weight: 600;
+      border: none;
+      border-radius: 10px;
+      margin-top: 25px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #ACB6E5, #74ebd5);
+      color: #000;
+    }
+
+    .back-link {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Analyze YouTube Comments</h1>
+
+    <form method="POST">
+      {% csrf_token %}
+      <label for="url">Enter YouTube URL:</label>
+      <input type="text" id="url" name="url" placeholder="Paste YouTube video link..." required>
+      <button type="submit">Analyze</button>
+    </form>
+
+    <a href="{% url 'index' %}" class="back-link">← Go back to home</a>
+  </div>
+
+</body>
+</html>
